@@ -1658,17 +1658,47 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
 
   this.createDateObject = function(date, format) {
     
+    
+    switch (format) {
+      
+      case 'MMMM':
+        format = 'jMMMM';
+        break;
+      case 'YYYY':
+      case 'yyyy':
+        format = 'jYYYY';
+        break;
+        case 'dd':
+          case 'DD':
+        format = 'jDD';
+        break;
+         
+      case 'YYYY-MM-DD[T]HH:mm:ss':
+        format = 'jYYYY/jMM/jDD HH:mm';
+        break;
+      default:
+        break;
+    }
+    
+    
+    
     var model = ngModelCtrl.$viewValue ? new Date(ngModelCtrl.$viewValue) : null;
     model = dateParser.fromTimezone(model, ngModelOptions.getOption('timezone'));
     var today = new Date();
     // var today = new Date();
     today = dateParser.fromTimezone(today, ngModelOptions.getOption('timezone'));
     var time = this.compare(date, today);
+
+    //correct selected month in month view persian mode
+    // if(format ==='jMMMM') {
+      
+    //  date = momentJ(date).add(-15,'day').toDate();
+    // }
     
     var dt = {
       
       date: date,
-      label: momentJ(date).jDate(),
+      label:momentJ(date).format(format),
       selected: model && this.compare(date, model) === 0,
       disabled: this.isDisabled(date),
       past: time < 0,
@@ -1678,12 +1708,16 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
     };
 
     if (model && this.compare(date, model) === 0) {
+      
+    
       $scope.selectedDt = dt;
+    
     }
 
     if (self.activeDate && this.compare(dt.date, self.activeDate) === 0) {
       
       $scope.activeDt = dt;
+     
     }
     
       return dt;
@@ -1954,6 +1988,7 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
   };
 
   this.compare = function(date1, date2) {
+  
     
     
     var _date1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate());
@@ -2014,27 +2049,36 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
         year = this.activeDate.getFullYear(),
         
         date;
-        console.log('months: ', months);
-        console.log('year: ', year);
-        console.log('this.activeDate: ', this.activeDate);
+        
+        
+     
+        
     for (var i = 0; i < 12; i++) {
-      date = new Date(this.activeDate);
-      date.setFullYear(year, i, 1);
+      date =momentJ(this.activeDate).startOf('jYear').toDate();
+      
+      // date = new Date(this.activeDate);
+      date = momentJ(date).add(i,'jmonth').toDate();
+      // date = momentJ(date).startOf('jMonth').toDate();
       months[i] = angular.extend(this.createDateObject(date, this.formatMonth), {
         uid: scope.uniqueId + '-' + i
       });
     }
 
-    scope.title = dateFilter(this.activeDate, this.formatMonthTitle);
-    console.log('scope.title: ', scope.title);
+    // scope.title = dateFilter(this.activeDate, this.formatMonthTitle);
+    scope.title = momentJ(this.activeDate).jYear();
+    
     scope.rows = this.split(months, this.monthColumns);
-    console.log('scope.rows : ', scope.rows );
+    
     scope.yearHeaderColspan = this.monthColumns > 3 ? this.monthColumns - 2 : 1;
   };
 
   this.compare = function(date1, date2) {
+    
+    
     var _date1 = new Date(date1.getFullYear(), date1.getMonth());
     var _date2 = new Date(date2.getFullYear(), date2.getMonth());
+
+    
     _date1.setFullYear(date1.getFullYear());
     _date2.setFullYear(date2.getFullYear());
     return _date1 - _date2;
@@ -2068,6 +2112,7 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
   this.element = $element;
 
   function getStartingYear(year) {
+    
     return parseInt((year - 1) / range, 10) * range + 1;
   }
 
@@ -2081,8 +2126,10 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
     var years = new Array(range), date;
 
     for (var i = 0, start = getStartingYear(this.activeDate.getFullYear()); i < range; i++) {
+      
       date = new Date(this.activeDate);
-      date.setFullYear(start + i, 0, 1);
+      //persian start of year 
+      date.setFullYear(start + i, 3,20);
       years[i] = angular.extend(this.createDateObject(date, this.formatYear), {
         uid: scope.uniqueId + '-' + i
       });
@@ -2090,6 +2137,9 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
 
     scope.title = [years[0].label, years[range - 1].label].join(' - ');
     scope.rows = this.split(years, columns);
+    
+    
+    
     scope.columns = columns;
   };
 
@@ -7591,9 +7641,9 @@ angular.module("uib/template/datepicker/month.html", []).run(["$templateCache", 
     "<table role=\"grid\" aria-labelledby=\"{{::uniqueId}}-title\" aria-activedescendant=\"{{activeDateId}}\">\n" +
     "  <thead>\n" +
     "    <tr>\n" +
-    "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-left uib-left\" ng-click=\"move(-1)\" tabindex=\"-1\"><i aria-hidden=\"true\" class=\"glyphicon glyphicon-chevron-left\"></i><span class=\"sr-only\">previous</span></button></th>\n" +
+    "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-left uib-left\" ng-click=\"move(-1)\" tabindex=\"-1\"><i aria-hidden=\"true\" class=\"glyphicon glyphicon-chevron-right\"></i><span class=\"sr-only\">previous</span></button></th>\n" +
     "      <th colspan=\"{{::yearHeaderColspan}}\"><button id=\"{{::uniqueId}}-title\" role=\"heading\" aria-live=\"assertive\" aria-atomic=\"true\" type=\"button\" class=\"btn btn-default btn-sm uib-title\" ng-click=\"toggleMode()\" ng-disabled=\"datepickerMode === maxMode\" tabindex=\"-1\"><strong>{{title}}</strong></button></th>\n" +
-    "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-right uib-right\" ng-click=\"move(1)\" tabindex=\"-1\"><i aria-hidden=\"true\" class=\"glyphicon glyphicon-chevron-right\"></i><span class=\"sr-only\">next</span></i></button></th>\n" +
+    "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-right uib-right\" ng-click=\"move(1)\" tabindex=\"-1\"><i aria-hidden=\"true\" class=\"glyphicon glyphicon-chevron-left\"></i><span class=\"sr-only\">next</span></i></button></th>\n" +
     "    </tr>\n" +
     "  </thead>\n" +
     "  <tbody>\n" +
@@ -7621,9 +7671,9 @@ angular.module("uib/template/datepicker/year.html", []).run(["$templateCache", f
     "<table role=\"grid\" aria-labelledby=\"{{::uniqueId}}-title\" aria-activedescendant=\"{{activeDateId}}\">\n" +
     "  <thead>\n" +
     "    <tr>\n" +
-    "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-left uib-left\" ng-click=\"move(-1)\" tabindex=\"-1\"><i aria-hidden=\"true\" class=\"glyphicon glyphicon-chevron-left\"></i><span class=\"sr-only\">previous</span></button></th>\n" +
+    "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-left uib-left\" ng-click=\"move(-1)\" tabindex=\"-1\"><i aria-hidden=\"true\" class=\"glyphicon glyphicon-chevron-right\"></i><span class=\"sr-only\">previous</span></button></th>\n" +
     "      <th colspan=\"{{::columns - 2}}\"><button id=\"{{::uniqueId}}-title\" role=\"heading\" aria-live=\"assertive\" aria-atomic=\"true\" type=\"button\" class=\"btn btn-default btn-sm uib-title\" ng-click=\"toggleMode()\" ng-disabled=\"datepickerMode === maxMode\" tabindex=\"-1\"><strong>{{title}}</strong></button></th>\n" +
-    "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-right uib-right\" ng-click=\"move(1)\" tabindex=\"-1\"><i aria-hidden=\"true\" class=\"glyphicon glyphicon-chevron-right\"></i><span class=\"sr-only\">next</span></button></th>\n" +
+    "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-right uib-right\" ng-click=\"move(1)\" tabindex=\"-1\"><i aria-hidden=\"true\" class=\"glyphicon glyphicon-chevron-left\"></i><span class=\"sr-only\">next</span></button></th>\n" +
     "    </tr>\n" +
     "  </thead>\n" +
     "  <tbody>\n" +
