@@ -55,9 +55,11 @@ var defaultConfig = {
   csrfCookieName: 'XSRF-TOKEN',
   disableWelcomeMessage: false,
   userOperationLogAnnotationLength: 4000
-};
+}; 
 
 module.exports = function(config, app) {
+  
+  
   return [
     function() {
       var storage = window.localStorage;

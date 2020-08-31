@@ -146,14 +146,17 @@ module.exports = function(pluginDependencies) {
     '$scope',
     '$route',
     'camAPI',
-    function($scope, $route, camAPI) {
+    'configuration',
+    function($scope, $route, camAPI,configuration) {
       var userService = camAPI.resource('user');
       function getUserProfile(auth) {
         if (!auth || !auth.name) {
           $scope.userFullName = null;
           return;
         }
-
+        $scope.appVendor = configuration.getAppVendor();
+        $scope.appName = configuration.getAppName();
+        
         userService.profile(auth.name, function(err, info) {
           if (!err) {
             $scope.userFullName = info.firstName + ' ' + info.lastName;

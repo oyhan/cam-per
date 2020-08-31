@@ -16,11 +16,12 @@
  */
 
 window.camWelcomeConf = {
-  // app: {
-  //   name: 'Todos',
-  //   vendor: 'Company'
-  // },
-  //
+  
+  app: {
+    name:'yazd asd',
+    vendor:'bus'
+  },
+
   // configure the date format
   // "dateFormat": {
   //   "normal": "LLL",
@@ -51,3 +52,4 @@ window.camWelcomeConf = {
   // csrfCookieName: 'XSRF-TOKEN',
   // disableWelcomeMessage: false
 };
+

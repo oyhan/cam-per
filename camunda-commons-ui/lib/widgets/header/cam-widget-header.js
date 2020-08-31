@@ -24,16 +24,16 @@ var angular = require('../../../../camunda-bpm-sdk-js/vendor/angular'),
 
 var apps = {
   welcome: {
-    label: 'Welcome'
+    label: 'خوش آمدگویی'
   },
   admin: {
-    label: 'Admin'
+    label: 'مدیریت'
   },
   cockpit: {
-    label: 'Cockpit'
+    label: 'کابین راهبری'
   },
   tasklist: {
-    label: 'Tasklist'
+    label: 'لیست وظایف'
   }
 };
 
@@ -55,6 +55,7 @@ module.exports = function() {
     },
 
     compile: function(el, attrs) {
+      
       if (!attrs.toggleNavigation) {
         attrs.toggleNavigation = 'CAM_WIDGET_HEADER_TOGGLE_NAVIGATION';
       }
@@ -97,8 +98,9 @@ module.exports = function() {
 
           if ($scope.authentication && $scope.authentication.name) {
             delete kept.welcome;
-
+ 
             Object.keys(kept).forEach(function(appName) {
+              
               if ($scope.authentication.authorizedApps.indexOf(appName) < 0) {
                 delete kept[appName];
               }

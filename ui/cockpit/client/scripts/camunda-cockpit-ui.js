@@ -137,6 +137,10 @@ module.exports = function(pluginDependencies) {
     }
   ];
 
+  appNgModule.controller(
+    'camCockpitAppCtrl',
+    require('./controller/cam-cockpit-app-ctrl')
+  );
   appNgModule.provider(
     'configuration',
     require('./../../../common/scripts/services/cam-configuration')(
@@ -144,6 +148,8 @@ module.exports = function(pluginDependencies) {
       'Cockpit'
     )
   );
+
+
   appNgModule.config(ModuleConfig);
 
   require('./../../../common/scripts/services/locales')(

@@ -17,10 +17,10 @@
 
 window.camTasklistConf = {
   // change the app name and vendor
-  // app: {
-  //   name: 'Todos',
-  //   vendor: 'Company'
-  // },
+  app: {
+    name: '\u{645}\u{62f}\u{6cc}\u{631}\u{6cc}\u{62a}\u{20}\u{648}\u{638}\u{627}\u{6cc}\u{641}',
+    vendor: 'Company'
+  },
   //
   // configure the date format
   // "dateFormat": {

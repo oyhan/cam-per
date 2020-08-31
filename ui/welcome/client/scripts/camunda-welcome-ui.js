@@ -108,7 +108,7 @@ module.exports = function(pluginDependencies) {
   );
   appNgModule.controller('WelcomePage', require('./controllers/welcome-page'));
 
-  appNgModule.config(ModuleConfig);
+  appNgModule.config(ModuleConfig); 
 
   require('./../../../common/scripts/services/locales')(
     appNgModule,

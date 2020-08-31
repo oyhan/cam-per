@@ -37,6 +37,7 @@
     <link rel="stylesheet"
           type="text/css"
           href="$APP_ROOT/app/admin/styles/user-styles.css?bust=$GRUNT_CACHE_BUST">
+          <link rel="stylesheet" type="text/css" href="$APP_ROOT/app/cockpit/styles/bootstrap-rtl.css">
 
     <!-- favicon -->
     <link rel="shortcut icon"
@@ -49,7 +50,7 @@
          authentication="authentication"
          user-name="userFullName"
          current-app="admin"
-         brand-name="Camunda Admin"
+         brand-name="{{ appVendor }} {{ appName }}"
          ng-cloak>
       <ul cam-if-logged-in
           ng-controller="NavigationController">

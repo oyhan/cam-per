@@ -16,6 +16,10 @@
  */
 
 window.camCockpitConf = {
+  app: {
+    name: '\u{6a9}\u{627}\u{628}\u{6cc}\u{646}\u{20}\u{631}\u{627}\u{647}\u{628}\u{631}\u{6cc}',
+    vendor: ' '
+  },
   // // custom libraries and scripts loading and initialization,
   // // see: http://docs.camunda.org/guides/user-guide/#tasklist-customizing-custom-scripts
   // customScripts: {

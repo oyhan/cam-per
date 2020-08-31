@@ -40,13 +40,14 @@
     <link rel="stylesheet"
           type="text/css"
           href="$APP_ROOT/app/cockpit/styles/user-styles.css?bust=$GRUNT_CACHE_BUST">
+          <link rel="stylesheet" type="text/css" href="$APP_ROOT/app/cockpit/styles/bootstrap-rtl.css">
 
     <!-- favicon -->
     <link rel="shortcut icon"
           href="$APP_ROOT/app/cockpit/assets/images/favicon.ico"
           type="image/x-icon" />
   </head>
-  <body>
+  <body ng-controller="camCockpitAppCtrl">
     <!-- navigation -->
     <div cam-widget-header
          authentication="authentication"
@@ -55,7 +56,7 @@
          ng-cloak
          sign-out="{{ 'SIGN_OUT_ACTION' | translate }}"
          my-profile="{{ 'MY_PROFILE' | translate }}"
-         brand-name="Camunda Cockpit">
+         brand-name="{{ appVendor }} {{ appName }}">
       <ul cam-if-logged-in
           ng-controller="camHeaderViewsCtrl">
         <li ng-repeat="actionProvider in menuActions"

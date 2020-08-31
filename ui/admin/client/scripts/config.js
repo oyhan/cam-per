@@ -16,6 +16,10 @@
  */
 
 window.camAdminConf = {
+  app: {
+    name: '\u{645}\u{62f}\u{6cc}\u{631}\u{6cc}\u{62a}\u{20}\u{641}\u{631}\u{627}\u{6cc}\u{646}\u{62f}\u{647}\u{627}',
+    vendor: ' '
+  },
   // // custom libraries and scripts loading and initialization,
   // // see: http://docs.camunda.org/guides/user-guide/#tasklist-customizing-custom-scripts
   // customScripts: {
