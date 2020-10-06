@@ -13,7 +13,8 @@
      ng-if="authentication.name"
      href="#/"
      title="{{ brandName }} {{ appName }}">
-     <span ng-bind-html="logo" class="brand-logo" />
+     <!-- <span ng-bind-html="logo" class="brand-logo" /> -->
+     <object class="brand-logo" data="/camunda/app/tasklist/assets/images/logo-2020-round.svg" type="image/svg+xml"></object>
      <span class="brand-name" ng-cloak>{{ brandName }}</span>
   </a>
 
