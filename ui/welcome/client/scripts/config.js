@@ -18,8 +18,8 @@
 window.camWelcomeConf = {
   
   app: {
-    name:'yazd asd',
-    vendor:'bus'
+    name:'\u{628}\u{647}\u{20}\u{633}\u{627}\u{645}\u{627}\u{646}\u{647}\u{20}\u{645}\u{62f}\u{6cc}\u{631}\u{6cc}\u{62a}\u{20}\u{641}\u{631}\u{627}\u{6cc}\u{646}\u{62f}\u{647}\u{627}\u{20}\u{62e}\u{648}\u{634}\u{20}\u{622}\u{645}\u{62f}\u{6cc}\u{62f}',
+    vendor:' '
   },
 
   // configure the date format

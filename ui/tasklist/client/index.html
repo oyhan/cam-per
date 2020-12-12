@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head ng-controller="camTasklistAppCtrl">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <title>Camunda Tasklist</title>
+  <title>{{ appName }}</title>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="description" content="Camunda Tasklist" />
-  <meta name="author" content="Camunda services GmbH" />
+  <meta name="description" content="{{ appName }}" />
+  <meta name="author" content="Gset co" />
 
   <!--< base href="/" /> -->
   <base href="$BASE" admin-api="$APP_ROOT/api/admin/" tasklist-api="$APP_ROOT/api/tasklist/"

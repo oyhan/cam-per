@@ -1,0 +1,3 @@
+To start the server in development mode, call
+
+mvn jetty:run -Pdevelop
