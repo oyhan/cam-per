@@ -10,21 +10,65 @@
 
   <div class="row">
     <div class="form-group col-xs-12 col-sm-6">
+     
       <label for="startDate">
         {{ 'EXECUTION_METRICS_START_DATE' | translate }}
       </label>
-      <input type="text"
-             name="startDate"
-             ng-model="startDate"
-             ng-required="true"
-             ng-change="handleDateChange()"
-             class="form-control"
-             id="startDate"
-             date />
+      <div class="input-group">
+        <!-- hidden original value holder -->
+        <input uib-datepicker-popup="yyyy/MM/dd" 
+        name="startDate"
+        ng-change="handleDateChange()"
+        ng-model="startDate"
+        ng-required="true"
+        ng-click="open($event,1)"
+            is-open="startDatePicker" id="startDate"
+            type="hidden" required ng-model="startDate">
+
+        <!-- persian text wrapper -->
+        <input type="text" disabled 
+            class="form-control"
+            value="{{startDate | camDate}}"
+            >
+
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open($event,1)">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </button>
+        </span>
+    </div>
+
     </div>
 
     <div class="form-group col-xs-12 col-sm-6">
       <label for="endDate">
+        {{ 'EXECUTION_METRICS_END_DATE' | translate }}
+      </label>
+      <div class="input-group">
+        <!-- hidden original value holder -->
+        <input uib-datepicker-popup="yyyy/MM/dd" 
+        name="endDate"
+        ng-change="handleDateChange()"
+        ng-model="endDate"
+        ng-required="true"
+        ng-click="open($event,2)"
+            is-open="endDatePicker" id="endDate"
+            type="hidden" required ng-model="endDate">
+
+        <!-- persian text wrapper -->
+        <input type="text" disabled 
+            class="form-control"
+            value="{{endDate | camDate}}"
+            >
+
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open($event,2)">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </button>
+        </span>
+    </div>
+
+      <!-- <label for="endDate">
         {{ 'EXECUTION_METRICS_END_DATE' | translate }}
       </label>
       <input type="text"
@@ -35,7 +79,7 @@
              class="form-control"
              id="endDate"
              date />
-    </div>
+    </div> -->
   </div>
 
 

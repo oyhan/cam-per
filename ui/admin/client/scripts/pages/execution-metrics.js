@@ -31,6 +31,27 @@ var Controller = [
   function($scope, $filter, Uri, camAPI, fixDate) {
     var MetricsResource = camAPI.resource('metrics');
 
+
+    //Added by Ali Rahighi
+    $scope.open = function($event,param) {
+            
+      $event.preventDefault();
+      $event.stopPropagation();
+      switch (param) {
+          case 1 :
+          $scope.startDatePicker = true
+          break;
+          case 2 :
+          $scope.endDatePicker = true
+          break;
+          default: 
+          $scope.dateFieldOpened = true;
+
+
+      }
+      
+    };
+
     // date variables
     var now = new Date();
     var dateFilter = $filter('date');
